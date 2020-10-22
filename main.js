@@ -9,7 +9,7 @@ const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 
-const songs = ['One%20Call%20Away','China-X'];
+const songs = ['One Call Away','China-X','君色に染まる'];
 
 let songIndex = 0;
 
