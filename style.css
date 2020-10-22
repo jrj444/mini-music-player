@@ -3,7 +3,8 @@
 }
 
 body {
-  background-image: linear-gradient(0deg,rgba(247,247,247,1) 23.8%,rgba(252,221,221,1) 92%);
+  background-image: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,12 +12,18 @@ body {
   justify-content: center;
   font-family: 'Lato', sans-serif;
   margin: 0;
+  animation: rainbow 18s ease infinite;
+}
+
+@keyframes rainbow {
+  0% {background-position: 0% 82%}
+  50% {background-position: 100% 19%}
+  100% {background-position: 0% 82%}
 }
 
 .music-container {
   background: #fff;
   border-radius: 15px;
-  box-shadow: 0 20px 20px 0 rgba(252,169,169,0.6);
   display: flex;
   padding: 20px 30px;
   position: relative;
