@@ -5,11 +5,10 @@ const nextBtn = document.getElementById('next');
 
 const audio = document.getElementById('audio');
 const progress = document.getElementById('progress');
-const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 
-const songs = ['One Call Away','China-X','君色に染まる'];
+const songs = ['One Call Away', 'China-X', '君色に染まる'];
 
 let songIndex = 0;
 
@@ -26,6 +25,7 @@ function playSong() {
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
   audio.play();
+  onLoadAudio();
 }
 
 function pauseSong() {
@@ -57,6 +57,49 @@ function updateProgress(e) {
   const {duration, currentTime} = e.target;
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
+}
+
+function onLoadAudio() {
+  let context = new window.AudioContext();
+  let analyser = context.createAnalyser();
+  analyser.fftSize = 512;
+  let source = context.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(context.destination);
+
+  let bufferLength = analyser.frequencyBinCount;
+  let dataArray = new Uint8Array(bufferLength);
+
+  let canvas = document.getElementById('canvas');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let ctx = canvas.getContext('2d');
+  const WIDTH = canvas.width;
+  const HEIGHT = canvas.height;
+
+  let barWidth = WIDTH / bufferLength * 1.5;
+  let barHeight;
+
+  function renderFrame() {
+    requestAnimationFrame(renderFrame);
+    analyser.getByteFrequencyData(dataArray);
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    for (let i = 0, x = 0; i < bufferLength; i++) {
+      barHeight = dataArray[i];
+
+      let r = barHeight + 25 * (i / bufferLength);
+      let g = 250 * (i / bufferLength);
+      let b = 50;
+
+      ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+      ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+
+      x += barWidth + 2;
+    }
+  }
+
+  renderFrame();
 }
 
 playBtn.addEventListener('click', () => {
