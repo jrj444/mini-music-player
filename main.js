@@ -10,7 +10,7 @@ const cover = document.getElementById('cover');
 
 const songs = ['One Call Away', 'China-X', '君色に染まる'];
 
-let songIndex = 0;
+let songIndex = 1;
 
 function loadSong(song) {
   title.innerText = song;
@@ -71,8 +71,8 @@ function onLoadAudio() {
   let dataArray = new Uint8Array(bufferLength);
 
   let canvas = document.getElementById('canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = 640;
+  canvas.height = 240;
 
   let ctx = canvas.getContext('2d');
   const WIDTH = canvas.width;
