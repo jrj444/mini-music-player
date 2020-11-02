@@ -2,11 +2,11 @@ const musicContainer = document.getElementById('music-container');
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
-
 const audio = document.getElementById('audio');
 const progress = document.getElementById('progress');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
+const barChartWrapper = document.getElementById('bar-chart-wrapper');
 
 const songs = ['One Call Away', 'China-X', '君色に染まる'];
 
@@ -22,6 +22,7 @@ loadSong(songs[songIndex]);
 
 function playSong() {
   musicContainer.classList.add('play');
+  barChartWrapper.classList.add('active');
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
   audio.play();
@@ -30,6 +31,7 @@ function playSong() {
 
 function pauseSong() {
   musicContainer.classList.remove('play');
+  barChartWrapper.classList.remove('active');
   playBtn.querySelector('i.fas').classList.add('fa-play');
   playBtn.querySelector('i.fas').classList.remove('fa-pause');
   audio.pause();

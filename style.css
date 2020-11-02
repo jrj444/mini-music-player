@@ -15,8 +15,15 @@ body {
   animation: rainbow 18s ease infinite;
 }
 
-.bar-chart {
-  margin-top: 12px;
+.bar-chart-wrapper {
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.bar-chart-wrapper.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
 @keyframes rainbow {
