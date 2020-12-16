@@ -74,7 +74,7 @@ function onLoadAudio() {
 
   let canvas = document.getElementById('canvas');
   canvas.width = 640;
-  canvas.height = 240;
+  canvas.height = 255;
 
   let ctx = canvas.getContext('2d');
   const WIDTH = canvas.width;
